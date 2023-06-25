@@ -1,1 +1,17 @@
 @import '/node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FB3E46;
+    font-family: 'Bangers', cursive;
+}
+
+.container {
+    border-radius: 40px;
+}
