@@ -2,11 +2,13 @@
 import axios from 'axios';
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
+import AppSelectType from './components/AppSelectType.vue';
 import { store } from './store.js';
 export default {
   components:{
     AppMain,
-    AppHeader
+    AppHeader,
+    AppSelectType
   },
   data(){
     return{
@@ -14,10 +16,22 @@ export default {
     }
   },
   mounted(){
-    axios.get(store.apiUrl).then((response) => 
+    this.getPokemonTypes()
+  },
+  methods:{
+    
+    getPokemonTypes()
     {
-      store.arrayPokeCards = response.data.docs;
-    })
+      let myUrl=store.apiUrl;
+      if(store.typeValue !== '')
+      {
+        myUrl += `&eq[type1]=${store.typeValue}`
+      }
+      axios.get(myUrl).then((response) =>
+      {
+        store.arrayPokeCards = response.data.docs;
+      })
+    }
   }
 }
 </script>
@@ -25,7 +39,7 @@ export default {
 <template>
   
   <div>
-    <AppHeader/>
+    <AppHeader @change="getPokemonTypes"/>
     <AppMain/>
   </div>
 
